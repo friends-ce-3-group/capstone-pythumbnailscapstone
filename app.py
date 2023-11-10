@@ -19,3 +19,7 @@ s3 = boto3.resource('s3', region_name='us-west-2')
 # download the file from s3
 s3.meta.client.download_file(s3Bucket, s3Key, tmpFilePath)
 im = Image.open(tmpFilePath)
+width, height = im.size
+
+print(f'The image width is {width}')
+print(f'The image height is {height}')
