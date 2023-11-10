@@ -11,6 +11,7 @@ s3FileName = s3KeySplit[1]
 tmpFilePath = '/tmp/'+s3FileName
 
 if s3FolderName != 'originals':
+    print(f'Ignore Event as object is not created on the originals folder.')
     exit()
 
 print(f'This method converts an original image from {s3Bucket}/{s3Key} into a thumbnail.')
