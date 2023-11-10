@@ -11,10 +11,8 @@ tmpFilePath = '/tmp/'+s3FileName
 
 print(f'This method converts an original image from {s3Bucket}/{s3Key} into a thumbnail.')
 
+# connect to s3 resource
 s3 = boto3.resource('s3', region_name='us-west-2')
-# origObject = s3.Object(bucket_name = s3Bucket, key = s3Key)
-# print(origObject.bucket_name)
-# print(origObject.key)
 
 # download the file from s3
 s3.meta.client.download_file(s3Bucket, s3Key, tmpFilePath)
@@ -30,3 +28,6 @@ im = Image.open(tmpFilePath)
 newWidth, newHeight = im.size
 print(f'The new image width is {newWidth}')
 print(f'The new image height is {newHeight}')
+
+# upload the file to s3
+s3.meta.client.upload_file(tmpFilePath, s3Bucket, 'thumbnails/'+s3FileName)
