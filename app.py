@@ -6,8 +6,12 @@ from PIL import Image, ImageOps
 s3Bucket = os.environ['S3_BUCKET']
 s3Key = os.environ['S3_KEY']
 s3KeySplit = s3Key.split("/")
+s3FolderName = s3KeySplit[0]
 s3FileName = s3KeySplit[1]
 tmpFilePath = '/tmp/'+s3FileName
+
+if s3FolderName != 'originals':
+    exit()
 
 print(f'This method converts an original image from {s3Bucket}/{s3Key} into a thumbnail.')
 
