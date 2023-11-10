@@ -17,5 +17,5 @@ s3 = boto3.resource('s3', region_name='us-west-2')
 # print(origObject.key)
 
 # download the file from s3
-s3.download_file(s3Bucket, s3Key, tmpFilePath)
+s3.meta.client.download_file(s3Bucket, s3Key, tmpFilePath)
 im = Image.open(tmpFilePath)
