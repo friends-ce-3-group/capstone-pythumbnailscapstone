@@ -1,7 +1,7 @@
 # app.py
 import os
 import boto3
-from PIL import Image
+from PIL import Image, ImageOps
 
 s3Bucket = os.environ['S3_BUCKET']
 s3Key = os.environ['S3_KEY']
@@ -22,8 +22,8 @@ print(f'The image width is {width}')
 print(f'The image height is {height}')
 
 # resize
-im.thumbnail((width/2, height/2))
-im.save(tmpFilePath)
+size = (180, 252)
+ImageOps.fit(im, size).save(tmpFilePath)
 im = Image.open(tmpFilePath)
 newWidth, newHeight = im.size
 print(f'The new image width is {newWidth}')
