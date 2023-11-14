@@ -3,6 +3,8 @@ import os
 import boto3
 from dotenv import load_dotenv
 from PIL import Image, ImageOps
+from mysql import connector
+
 
 load_dotenv()
 s3Bucket = os.environ['S3_BUCKET']
@@ -47,3 +49,22 @@ category = s3FileNameParts[1]
 print(accessType)
 print(category)
 print(os.getenv('ENDPOINT'))
+
+mydb = mysql.connector.connect(
+  host=os.getenv('ENDPOINT'),
+  user=os.getenv('DBUSER'),
+  password=os.getenv('DBPASS'),
+  database=os.getenv('DBNAME')
+)
+
+query = """INSERT INTO CardsCatalog (key, category, path, backgroundColor) 
+VALUES ('{}', '{}', '{}', '{}')""".format( 
+    s3FileName, category, s3FileName, '#ffffff')
+
+try:
+    with mydb.cursor() as cursor:
+        cursor.execute(query)
+except Exception as err:
+    data = { "Error": str(err) }
+    print(data)
+
