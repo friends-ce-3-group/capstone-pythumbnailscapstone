@@ -40,8 +40,10 @@ print(f'The new image height is {newHeight}')
 s3.meta.client.upload_file(tmpFilePath, s3Bucket, 'thumbnails/'+s3FileName)
 
 # insert an entry into CardsCatalog DB
-s3FileNameParts = s3FileName.split("-")
+s3FileNameParts = s3FileName.split('-')
 accessType = s3FileNameParts[0]
 category = s3FileNameParts[1]
 
-print(os.getenv(ENDPOINT))
+print(accessType)
+print(category)
+print(os.getenv('ENDPOINT'))
