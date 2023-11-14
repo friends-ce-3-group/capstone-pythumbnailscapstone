@@ -46,11 +46,7 @@ s3FileNameParts = s3FileName.split('-')
 accessType = s3FileNameParts[0]
 category = s3FileNameParts[1]
 
-print(accessType)
-print(category)
-print(os.getenv('ENDPOINT'))
-
-mydb = mysql.connector.connect(
+mydb = connector.connect(
   host=os.getenv('ENDPOINT'),
   user=os.getenv('DBUSER'),
   password=os.getenv('DBPASS'),
