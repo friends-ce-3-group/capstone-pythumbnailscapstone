@@ -1,8 +1,10 @@
 # app.py
 import os
 import boto3
+from dotenv import load_dotenv
 from PIL import Image, ImageOps
 
+load_dotenv()
 s3Bucket = os.environ['S3_BUCKET']
 s3Key = os.environ['S3_KEY']
 s3KeySplit = s3Key.split("/")
@@ -11,7 +13,7 @@ s3FileName = s3KeySplit[1]
 tmpFilePath = '/tmp/'+s3FileName
 
 if s3FolderName != 'originals':
-    print(f'Ignore Event as object is not created on the originals folder.')
+    print(f'Ignore Event as object is not created in the originals folder.')
     exit()
 
 print(f'This method converts an original image from {s3Bucket}/{s3Key} into a thumbnail.')
@@ -36,3 +38,10 @@ print(f'The new image height is {newHeight}')
 
 # upload the file to s3
 s3.meta.client.upload_file(tmpFilePath, s3Bucket, 'thumbnails/'+s3FileName)
+
+# insert an entry into CardsCatalog DB
+s3FileNameParts = s3FileName.split("-")
+accessType = s3FileNameParts[0]
+category = s3FileNameParts[1]
+
+print(os.getenv(ENDPOINT))

@@ -5,3 +5,5 @@
 Werkzeug==2.2.3
 boto3==1.28.80
 Pillow
+mysql-connector-python==8.2.0
+python-dotenv==1.0.0

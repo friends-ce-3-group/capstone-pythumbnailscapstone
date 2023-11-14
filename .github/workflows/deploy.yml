@@ -19,6 +19,15 @@ jobs:
     steps:
         - uses: actions/checkout@v4
 
+        - uses: cschleiden/replace-tokens@v1
+          with:
+            files: '["**/.env"]'
+          env:
+            ENDPOINT: ${{ vars.RDS_ENDPOINT_ADDRESS }}
+            DBUSER: ${{ secrets.DB_USERNAME }}
+            DBPASS: ${{ secrets.DB_PASSWORD }}
+            DBNAME: ${{ vars.RDS_DBNAME }}
+
         - name: Set variables (1)
           run: |
             full_url=$ECR_URL
