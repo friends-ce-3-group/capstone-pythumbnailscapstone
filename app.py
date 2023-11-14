@@ -54,9 +54,8 @@ mydb = connector.connect(
 )
 
 query = """INSERT INTO CardsCatalog (key, category, path, backgroundColor) 
-VALUES ('{}', '{}', '{}', '{}')""".format( 
-    s3FileName, category, s3FileName, '#ffffff')
-
+VALUES ('{}', '{}', '{}', '{}')""".format(s3FileName, category, s3FileName, '#ffffff')
+print(query)
 try:
     with mydb.cursor() as cursor:
         cursor.execute(query)
