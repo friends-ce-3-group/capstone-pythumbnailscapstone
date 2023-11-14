@@ -53,8 +53,7 @@ mydb = connector.connect(
   database=os.getenv('DBNAME')
 )
 
-query = """INSERT INTO CardsCatalog (key, category, path, backgroundColor) 
-VALUES ('{}', '{}', '{}', '{}')""".format(s3FileName, category, s3FileName, '#ffffff')
+query = """INSERT INTO CardsCatalog (key, category, path, backgroundColor) VALUES ('{}', '{}', '{}', '{}')""".format(s3FileName, category, s3FileName, '#ffffff')
 print(query)
 try:
     with mydb.cursor() as cursor:
