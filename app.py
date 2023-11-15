@@ -1,6 +1,7 @@
 # app.py
 import os
 import boto3
+import uuid
 from dotenv import load_dotenv
 from PIL import Image, ImageOps
 from mysql import connector
@@ -51,7 +52,7 @@ mydb = connector.connect(
   database=os.getenv('DBNAME')
 )
 
-query = """INSERT INTO CardsCatalog (cardKey, category, path, backgroundColor) VALUES ('{}', '{}', '{}', '{}')""".format(s3FileName, category, s3FileName, '#ffffff')
+query = """INSERT INTO CardsCatalog (cardKey, category, path, backgroundColor) VALUES ('{}', '{}', '{}', '{}')""".format(str(uuid.uuid4()), category, s3FileName, '#ffffff')
 print(query)
 try:
     with mydb.cursor() as cursor:
