@@ -53,11 +53,12 @@ mydb = connector.connect(
   database=os.getenv('DBNAME')
 )
 
-query = """INSERT INTO CardsCatalog (key, category, path, backgroundColor) VALUES ('{}', '{}', '{}', '{}')""".format(s3FileName, category, s3FileName, '#ffffff')
+query = """INSERT INTO CardsCatalog (cardKey, category, path, backgroundColor) VALUES ('{}', '{}', '{}', '{}')""".format(s3FileName, category, s3FileName, '#ffffff')
 print(query)
 try:
     with mydb.cursor() as cursor:
         cursor.execute(query)
+    print('Image inserted into CardsCatalog table successfully')
 except Exception as err:
     data = { "Error": str(err) }
     print(data)
