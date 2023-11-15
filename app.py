@@ -27,16 +27,14 @@ s3 = boto3.resource('s3', region_name='us-west-2')
 s3.meta.client.download_file(s3Bucket, s3Key, tmpFilePath)
 im = Image.open(tmpFilePath)
 width, height = im.size
-print(f'The image width is {width}')
-print(f'The image height is {height}')
+print(f'The image width is {width} and height is {height}')
 
 # resize
 size = (180, 252)
 ImageOps.fit(im, size).save(tmpFilePath)
 im = Image.open(tmpFilePath)
 newWidth, newHeight = im.size
-print(f'The new image width is {newWidth}')
-print(f'The new image height is {newHeight}')
+print(f'The new image width is {newWidth} and height is {newHeight}')
 
 # upload the file to s3
 s3.meta.client.upload_file(tmpFilePath, s3Bucket, 'thumbnails/'+s3FileName)
