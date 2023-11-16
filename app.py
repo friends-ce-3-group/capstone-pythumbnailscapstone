@@ -60,6 +60,7 @@ try:
         mydb.commit()
         print('Image inserted into CardsCatalog table successfully')
 
+        query = "SELECT * FROM {}".format('CardsCatalog')
         cursor.execute(query)
         result = cursor.fetchall()
         print('select all result:', result)
