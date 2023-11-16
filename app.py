@@ -58,7 +58,12 @@ try:
     with mydb.cursor() as cursor:
         cursor.execute(query)
         mydb.commit()
-    print('Image inserted into CardsCatalog table successfully')
+        print('Image inserted into CardsCatalog table successfully')
+
+        cursor.execute(query)
+        result = cursor.fetchall()
+        print('select all result:', result)
+
 except Exception as err:
     data = { "Error": str(err) }
     print(data)
