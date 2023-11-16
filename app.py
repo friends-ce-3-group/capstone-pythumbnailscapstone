@@ -37,7 +37,7 @@ im = Image.open(tmpFilePath)
 newWidth, newHeight = im.size
 print(f'The new original image width is {newWidth} and height is {newHeight}')
 # upload the original to s3 (overwrite existing original image)
-s3.meta.client.upload_file(tmpFilePath, s3Bucket, 'originals/'+s3FileName)
+s3.meta.client.upload_file(tmpFilePath, s3Bucket, 'resized/'+s3FileName)
 
 # resize for thumbnail
 size = (180, 252)
