@@ -57,6 +57,7 @@ print(query)
 try:
     with mydb.cursor() as cursor:
         cursor.execute(query)
+        mydb.commit()
     print('Image inserted into CardsCatalog table successfully')
 except Exception as err:
     data = { "Error": str(err) }
