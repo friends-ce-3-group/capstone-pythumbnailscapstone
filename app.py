@@ -54,12 +54,21 @@ s3FileNameParts = s3FileName.split('-')
 accessType = s3FileNameParts[0]
 category = s3FileNameParts[1]
 
-mydb = connector.connect(
-  host=os.getenv('ENDPOINT'),
-  user=os.getenv('DBUSER'),
-  password=os.getenv('DBPASS'),
-  database=os.getenv('DBNAME')
-)
+mydb = None
+try: 
+    mydb = connector.connect(
+    host=os.getenv('ENDPOINT_PROXY'),
+    user=os.getenv('DBUSER'),
+    password=os.getenv('DBPASS'),
+    database=os.getenv('DBNAME')
+    )
+except:
+    mydb = connector.connect(
+    host=os.getenv('ENDPOINT'),
+    user=os.getenv('DBUSER'),
+    password=os.getenv('DBPASS'),
+    database=os.getenv('DBNAME')
+    )
 
 query = """INSERT INTO CardsCatalog (cardKey, category, path, backgroundColor) VALUES ('{}', '{}', '{}', '{}')""".format(str(uuid.uuid4()), category, s3FileName, '#ffffff')
 print(query)

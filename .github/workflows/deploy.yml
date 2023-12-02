@@ -29,6 +29,7 @@ jobs:
             files: '["**/.env"]'
           env:
             ENDPOINT: ${{ vars.RDS_ENDPOINT_ADDRESS }}
+            ENDPOINT_PROXY: ${{ vars.RDS_PROXY_ENDPOINT_ADDRESS }}
             DBUSER: ${{ secrets.DB_USERNAME }}
             DBPASS: ${{ secrets.DB_PASSWORD }}
             DBNAME: ${{ vars.RDS_DBNAME }}
